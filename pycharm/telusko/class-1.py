@@ -1,0 +1,12 @@
+class computer:
+    def config(self):
+        print("i5","8GB")
+
+com1= computer()
+com2= computer()
+
+computer.config(com1)
+computer.config(com2)
+
+com1.config()
+com2.config()
