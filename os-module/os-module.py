@@ -17,8 +17,38 @@ import os
 
 #-- getting the current working directory
 
-print(os.getcwd())
+#print(os.getcwd())
 
 #-- Deleting the directory
 
-os.rmdir("students")
+#os.rmdir("students")
+
+#--- Listing .txt files in specific directory & subdirectories
+"""
+path = 'C:\\purushotham\\Learning\\python-learning'
+
+files = []
+
+for r,d,f in os.walk(path):
+    for file in f:
+        if '.txt' in file:
+            files.append(os.path.join(r,file))
+
+for i in files:
+    print(i)
+    """
+
+#---- Listing directories in specific directory & sub-directory
+
+path = 'C:\\purushotham\\Learning\\python-learning'
+
+folders = []
+#--- r=root,d=directory,f=file
+for r,d,f in os.walk(path):
+    for folder in d:
+        folders.append(os.path.join(r,folder))
+
+for folder in folders:
+    print(folder)
+
+

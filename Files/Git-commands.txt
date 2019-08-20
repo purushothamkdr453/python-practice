@@ -1,0 +1,166 @@
+Git Commands
+To Display the Git version :
+git version or git –version
+Setting Username and email in config file:
+git config –global user.name “Purushotham”
+git config –global user.email purushothamkdr143@gmail.com
+Displaying the config list:
+git config –list
+git config user.name
+Help commands:
+Git help -a -> list all the git commands
+Git help -g -> list all the git guides
+You can get help of each command or guide by using the following command.
+Git help <git subcommand/git guide>
+Initiate the git repo:
+Git init ( this command will create the .git folder,which is used for tracking the dir as git repo)
+Checking the status:
+Git status – this command is useful in checking the untracked files.
+Adding the untracked files to staging area:
+Git add . or git add <modified file>
+The above command will add the file to staging area.
+You run the command again git status – which will tell you that file is tracked and ready to commit.
+To remove the file from staging area.
+Git rm –cached <filename> or git reset HEAD <filename>
+This command will remove the file from staging area and once it is done the file is considered as untracked file. You can use the below command to see that.
+Git status.
+Commiting the file:
+After once file has been added to staging area, file is ready to commit, commit is helpful in creating the snapshot of the file at that particular instance. For commiting the file use the following command.
+Git commit -m “<message>”
+Git commit -m “first commit”
+Checking the log:
+To see all the commits and history we can use the following command.
+Git log
+Git log –oneline
+Git log –pretty=oneline
+Git log –author “<author name>”
+Git log –branches=*
+Git log <branchname>
+Viewing the changes:
+to view the changes made to the file we will use the following command.
+Git diff
+This command is used before adding the file to staging area.
+Note : this command shows the difference between the working copy and the remote copy.
+Renaming the file:
+If you rename the file manually , git considers as existing file deleted and new file has been created.
+To commit these changes you need run 2 commands
+Git status
+Git rm <old file or existing file>
+Git add <renamed file>
+Git commit -m “commiting the files”
+Git status
+Best way of doing it is running the below command
+Git mv <file-1> <file-2>
+Committing directly to a remote repo:
+ Git commit -am “<commit message”>
+Once the file has been modified you can directly commit to the remote repo.
+You don’t need to run git add in this case.
+Reverting the changes from remote repo to the modified file or discarding the changes in the working copy:
+Lets say you have modified the file, and you came to know that the changes made are wrong, so you can revert it to the original version i.e which is there in remote repo using the following command.
+Git checkout -- <filename>
+Note : this command is useful before adding the file to the staging area.
+Getting the older versions :
+you can get the older version of the file using the following command.
+Git checkout <commit id> -- <filename>
+To get the commit id as mentioned earlier you can use the below command.
+Git log
+Adding the remote repo details:
+Git remote add <name> <github url>
+For example: 
+git remote add gitpractice https://github.com/purushothamkdr453/git-practice.git
+git remote get-url <name>
+git remote rename <old> <new>
+git push -u <name> <branch>
+for example
+git push -u gitpractice master
+The above command will help in pushing the files to remote repo.
+Listing the current branches:
+Git branch
+Creating new branch and switching to new branch
+Git checkout -b <new branch> <old branch>
+Git checkout -b develop master
+Merging the code:
+Go to the branch to which you want to merge the code.
+Git checkout master
+Git merge develop
+In this case we are merging the changes to the master branch from develop branch.
+Deleting branches:
+git branch -d <branch name>
+Displaying local repo branches:
+Git branch
+Displaying remote repo branches:
+Git branch -r
+Displaying both remote repo and local repo branches:
+Git branch -a
+Git Hub Options:
+Watching/UnWatching -> Following the project and getting all the notifications
+Star -> Bookmarking the repos in our github account
+Fork -> Copying or Saving the project to our Github account
+Important Notes:
+Git pull -> Git fetch + git merge
+Git fetch – will fetch the remote tracking branches changes, after fetching the changes we need to merge the remote tracking branches changes with local master branch.
+Git pull ->  it is combination of both Git fetch + git merge, it fetches the changes from remote tracking branches and merges the code
+Git Stash:
+Stash is a temporary area where we can store files.
+Condition: inorder to use stash files must be in staging area
+Git stash save “<message>”
+Git stash list
+Git stash apply <stash id> ( copy, paste – doesn’t remove the stash id from the list )
+Git stash pop
+Git stash drop <stash id>
+Git stash clear ( removes all the stash from the list )
+Using Alias for frequently executing commits:
+https://khozemanullwala@bitbucket.org/khozemanullwala/sampleproject-to-fork.git 
+clone the above repo
+git config –global alias.lg “log  --oneline –graph”
+git lg
+git checkout develop
+modify the content in any files
+run git status -s
+
+now if you try to switch to master branch it wont work, so we need to save the changes temporarily.
+For this we use stash command.
+Git stash
+Git stash list
+git stash show
+git stash show stash@{0}
+git stash pop
+git add .
+git commit -m “commtting the new line”
+git stash pop -> git stash apply + git stash drop
+Pushing only specific commits from one branch to another( refer to same repo)
+Make some changes in develop branch
+And then commit changes
+Git cherry -v master ( which list the commits that are not pushed to master)
+Take any one commit id
+Git checkout master
+Git cherry-pick 8336bd5ff6661f79948412ec1a9e088a7a70b327(commit id picked)
+Git checkout develop
+Git checkout -v master
+Here you can see that one commit id is specified as ( - ) instead of ( + ) since it is already put into master branch
+Removing the untracked files:
+Git clean -nfd ( which tells you what files will be removed )
+Git clean -fd ( removes the files)
+Git Checkout vs Git Reset vs Git Reset Hard vs Git Reset Soft vs Git revert:
+Checkout – it is used to remove the untracked files. i.e lets stay you made some change in the existing file. If you run git status then it will tracked as untracked. To remove it run the following command
+Git checkout -- <filename>
+Eg: git checkout – sample.txt
+Git reset HARD~1 – moves the recent commit changes to working directory ( default is mixed )
+Git reset HARD~1 --soft – moves the recent commit changes files to staging 
+Git reset HARD~1 –hard – removes the recent commit changes 
+Git revert -> git revert command will be applied on the any commit id and changes that were applied of as part of that commit id will be reverted and for this new commit id will be generated.
+Git revert <commit i>
+Difference between git reset vs revert:
+Git reset – it will removes the commit id from history
+Git revert – it will not remove the commit id from history, and  instead it creates new commit id.
+Git Rebase:
+Git rebase is used for merging the commits from one branch to another branch. It is used to create linear history
+Still need to go through the following topics:
+Git ignore – This is the file which used to ignore some files and directories in the git repo.
+Git head – In most of the case Head will be pointed to the latest commit. ( git head show)
+Git difftool & mergetool
+Git stash, git rebease, git bisect,Git squash drop, subgit – Pending
+Squashing multiple commits
+What is broken commit and how to fix it
+Git stash apply
+Git ls-tree
